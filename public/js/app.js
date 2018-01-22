@@ -21,7 +21,7 @@ var litproApp = angular.module('app',[
 		$http.get('data/studentData.json')
 		.then(function(res){
 			$rootScope.studentData = res.data;
-			console.log($rootScope.studentData, "in app run")
+		//	console.log($rootScope.studentData, "in app run")
 		})
     $http.get('data/studentRawData.json')
     .then(function(res){
@@ -33,7 +33,7 @@ var litproApp = angular.module('app',[
       $rootScope.progress = true;
 
 
-      console.log($rootScope.studentRawData, "$rootScope.studentRawData")
+      //console.log($rootScope.studentRawData, "$rootScope.studentRawData")
       var formattedData = formatData($rootScope.studentRawData);
       $rootScope.formattedData = formattedData
     })
@@ -46,7 +46,7 @@ var litproApp = angular.module('app',[
       $rootScope.valueType2 = ['Number of Goals', 'Goals'];
       $rootScope.progress2 = true;
 
-      console.log($rootScope.studentRawData2, "$rootScope.studentRawData")
+     // console.log($rootScope.studentRawData2, "$rootScope.studentRawData")
       //var formattedData = formatData($rootScope.studentRawData);
       //$rootScope.formattedData = formattedData
     })
@@ -54,7 +54,7 @@ var litproApp = angular.module('app',[
   .controller('appCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
     $scope.helloObj = {name: "Emily", greeting: "Welcome!"}
  
-    console.log("scope in appCtrl", $scope)
+    //console.log("scope in appCtrl", $scope)
   }])
 
 

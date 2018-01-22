@@ -12,7 +12,11 @@ angular
   .directive( 'barChart', 
 	[function($scope){
 
-console.log($scope, "$scope in barchart directive")
+//console.log($scope, "$scope in barchart directive")
+
+	
+		
+
 	var link = function($scope, $el, $attrs){
 
 
@@ -221,10 +225,11 @@ console.log($scope, "$scope in barchart directive")
     		.attr("transform",function(d){return "translate(" + x0(d.date) + ",0)"})
       		.on('click', function(a,b,c){
      			//$scope.$emit('graphClick', a, b, c, "goal")    
-     		console.log(a, b, c ,"a,b,c barChart")
+     		//console.log(a, b, c ,"a,b,c barChart")
  			$scope.listClick(null, 'category', a.cat, a.ids, a.date)
 
-      		$scope.$apply();
+ 			$scope.$apply();
+      		//$scope.$apply(updateActive());
       		})
       		.attr("opacity", 0)
      		.attr("x", function(d) { 
@@ -237,14 +242,80 @@ console.log($scope, "$scope in barchart directive")
 		}
 
 		function resize(){
-				console.log("resize")
+				//console.log("resize")
 			 	svg.attr("width", $el[0].clientWidth);
         		svg.attr("height", $el[0].clientWidth);
 		}
 
 
+		var updateActive = function(){
+    
+			console.log("im in update active", $scope.activeObj)
+        if($scope.activeObj.type === "cat"){
+
+            if($scope.activeObj.previousStudents){
+
+            	for(let i = 0; i < $scope.activeObj.previousStudents.length; i++){
+            		d3.selectAll(".label_student_"+ $scope.activeObj.previousStudents[i]).attr("opacity", 0).attr("stroke-opacity", 0)
+            	}
+              
+                  
+              }
+
+              d3.selectAll("." + $scope.activeObj.previousCat).attr("opacity", 0).attr("stroke-opacity", 0)
+              d3.selectAll("." + $scope.activeObj.cat).attr("opacity",1).attr("stroke-opacity",1)
+             
+
+            
+        }
+        else if($scope.activeObj.type === "student"){
+
+
+            if($scope.activeObj.previousCat){
+               d3.selectAll("." + $scope.activeObj.previousCat).attr("opacity", 0).attr("stroke-opacity", 0)
+            }
+
+           for(let i = 0; i< $scope.activeObj.students.length; i++){
+           		console.log("inside students for loop",)
+           		  d3.selectAll(".label_student_"+ $scope.activeObj.students[i]).attr("opacity", 1).attr("stroke-opacity", 1)
+           }
+           for(let i = 0; i < $scope.activeObj.previousStudents.length; i++){
+           		d3.selectAll(".label_student_"+ $scope.activeObj.previousStudents[i]).attr("opacity", 0).attr("stroke-opacity", 0)
+           }
+            
+          
+          
+
+
+        }
+        else if($scope.activeObj.type == null){
+        	if($scope.activeObj.previousCat){
+        		d3.selectAll("." + $scope.activeObj.previousCat).attr("opacity", 0).attr("stroke-opacity", 0)
+        	}
+        	if($scope.activeObj.previousStudents){
+        		for(let i = 0; i < $scope.activeObj.previousStudents.length; i++){
+            		d3.selectAll(".label_student_"+ $scope.activeObj.previousStudents[i]).attr("opacity", 0).attr("stroke-opacity", 0)
+            	}
+        	}
+        }
+
+    
+
+      }
+
+      //updateActive();
+
+      	 $scope.$watch(function(){return $scope.activeObj.students}, function(newVal, oldVal){
+          if(!angular.equals(oldVal, newVal)){
+             console.log("something")
+            	updateActive($scope)
+          }
+         
+        }, true)
+
 		$scope.$on('windowResize', resize)
 		$scope.$watch('rawData', update)
+
 
 	}
 
@@ -259,7 +330,9 @@ console.log($scope, "$scope in barchart directive")
     	listClick: '=listclick'
 
     },
+    //link: link,
     link: link,
+    //controller: link,
     restrict: 'E'
     //controller : [ LitProChartController ],
     //controllerAs : 'vm'

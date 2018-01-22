@@ -15,10 +15,10 @@
 
 	 	<student-list-chart rawdata="rawChartData" apples="chartCtrl.apples" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></student-list-chart> 
   		<div ng-if="chartType === 'scatter'">
-  			<scatter-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></scatter-chart>
+  			<scatter-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick" timearray="timeArray"></scatter-chart>
   		</div>
   		<div ng-if="chartType === 'multiSeriesBar'">
-  			<bar-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></bar-chart>
+  			<bar-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick" numPeriods="timeArray"></bar-chart>
   		</div>
 
   	</div>

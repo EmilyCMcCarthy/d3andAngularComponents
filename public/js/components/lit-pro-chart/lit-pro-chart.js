@@ -15,7 +15,7 @@ angular
 
     var link = function($scope, $el, $attrs){
 
-      console.log($scope, "scope in lit ProChart")
+     // console.log($scope, "scope in lit ProChart")
     }
 
     return {
@@ -56,8 +56,8 @@ angular
     vm.activeObj = {type: "student", students: [], previousStudents: [], cat: null, previousCat: null};
 
       vm.listClick = function(id, type, cat, catIds, time){
-      console.log("clicking scope", $scope)
-      console.log(vm.activeObj, "activeObj in listClick")
+      //console.log("clicking scope", $scope)
+     // console.log(vm.activeObj, "activeObj in listClick")
       if(type === 'student'){
         if(vm.activeObj.students[0] === id && vm.activeObj.students.length === 1){
             vm.activeObj.students = [];
@@ -75,7 +75,7 @@ angular
           if(vm.activeObj.cat){
             vm.activeObj.previousCat = vm.activeObj.cat
        
-            vm.activeobj.cat = null;
+            vm.activeObj.cat = null;
             
 
           }
@@ -121,26 +121,15 @@ angular
 
 
         }
-       // vm.activeObj.previousStudents = vm.activeObj.students
-       // vm.activeObj.students = catIds;
-
+     
 
       }
-      // if(vm.activeObj.students.indexOf(id) === -1){
-      //    vm.activeObj.students.push(id)
-      // }
-      // else{
-      //   vm.activeObj.previousStudents.push(id);
-      //   vm.activeObj.students = [];
-      // } 
   
-
-     // $scope.$apply()
     }
 
 
-  console.log(d3,"d3")
-  console.log("$window in litprochartCtrler", $window)
+ // console.log(d3,"d3")
+  // console.log("$window in litprochartCtrler", $window)
 
   vm.formattedData = null;
 
