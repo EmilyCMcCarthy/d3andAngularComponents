@@ -1,0 +1,30 @@
+
+<div ng-module="app.components.litProChart" >
+	<div>
+	<h1>Hello From The Lit Pro Chart Component</h1>
+	<!-- <span display="inline-block">
+  <ul display="inline-block">
+  	<li class="student-row inactive"  ng-repeat="student in vm.students" display="inline-block" ng-click="vm.click(student.id)" ng-attr-id="{{ 'studentList_' + student.id }}" style="color:#253f73" >
+  		<p>{{student.name}}
+ 
+  		</p>
+  	</li>
+  </ul>
+
+</span> -->
+
+	 	<student-list-chart rawdata="rawChartData" apples="chartCtrl.apples" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></student-list-chart> 
+  		<div ng-if="chartType === 'scatter'">
+  			<scatter-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></scatter-chart>
+  		</div>
+  		<div ng-if="chartType === 'multiSeriesBar'">
+  			<bar-chart rawdata="rawChartData" activeobj="chartCtrl.activeObj" listclick="chartCtrl.listClick"></bar-chart>
+  		</div>
+
+  	</div>
+</div>
+
+  		
+  		
+
+ 

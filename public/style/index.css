@@ -1,0 +1,13 @@
+h1 {
+	color: green;
+}
+
+.student_list_inactive {
+	color: #253f73;
+	background-color: #f9f9f7;
+}
+
+.student_list_active {
+	color: #fdf7f5;
+	background-color: #eb7361;
+}

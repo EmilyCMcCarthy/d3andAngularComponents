@@ -1,0 +1,12 @@
+<div>
+	<h1>Student-List-Chart</h1>
+
+	<input ng-model="query" />
+
+	<ul>
+		<li ng-repeat="item in items" ng-show="([item.name] | filter:query).length" style="list-style-type:none">
+			<button ng-class="activeCheck(item.id)" ng-click="listClick(item.id, 'student')" >{{item.name}}</button></li>
+	</ul>
+</div>
+
+
