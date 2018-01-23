@@ -1,15 +1,5 @@
-// (function(){
+
 'use strict';
-
-/**
-* @name app
-* @ description
-* # app
-*
-* Main module of the application.
-*/
-
-
 
 var litproApp = angular.module('app',[
 	'app.components'
@@ -17,25 +7,14 @@ var litproApp = angular.module('app',[
 	]).run(function ($rootScope, $http){
 		$rootScope.activeStudent = undefined;
 		$rootScope.numberOfMonths = 5;
-
-		$http.get('data/studentData.json')
-		.then(function(res){
-			$rootScope.studentData = res.data;
-		//	console.log($rootScope.studentData, "in app run")
-		})
     $http.get('data/studentRawData.json')
     .then(function(res){
       $rootScope.studentRawData = res.data;
       $rootScope.chartType = 'scatter';
       $rootScope.profileType = 'group';
-      $rootScope.timeArray = ['September 2016', 'October 2016', 'November 2016', 'December 2016', 'January 2017'];
+      $rootScope.timeArray = ['09/01/2016', '10/01/2016', '11/01/2016', '12/01/2016', '01/01/2017'];
       $rootScope.valueType = ['Number of Minutes', 'Minutes'];
       $rootScope.progress = true;
-
-
-      //console.log($rootScope.studentRawData, "$rootScope.studentRawData")
-      var formattedData = formatData($rootScope.studentRawData);
-      $rootScope.formattedData = formattedData
     })
     $http.get('data/studentRawData2.json')
     .then(function(res){
@@ -45,58 +24,11 @@ var litproApp = angular.module('app',[
       $rootScope.timeArray2 = ['September 2016', 'October 2016', 'November 2016', 'December 2016', 'January 2017'];
       $rootScope.valueType2 = ['Number of Goals', 'Goals'];
       $rootScope.progress2 = true;
-
-     // console.log($rootScope.studentRawData2, "$rootScope.studentRawData")
-      //var formattedData = formatData($rootScope.studentRawData);
-      //$rootScope.formattedData = formattedData
     })
 	})
   .controller('appCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
     $scope.helloObj = {name: "Emily", greeting: "Welcome!"}
- 
-    //console.log("scope in appCtrl", $scope)
   }])
-
-
-  var jitter = function(value, range){ // function to accomplish the Jitter -- Value input is 1,2,3..., or N of months
-    var min = value - range;
-    var max = value + range;
-    var random = Math.round(((Math.random()*(max - min) + min))*10000) / 10000;
-    return random
-  };
-
-  var formatData = function(initialData){ 
-      var resArr = [];
-
-      for(let i =0 ; i < initialData.length; i++){
-        var obj = {
-            id: initialData[i].id,
-            label: initialData[i].name,
-            data: initialData[i].data.map(function(elem, ind){
-                    var rObj = {};
-                    rObj.month = ind + 1// need to make a function for months -- What if there are missing months for a student.. etc.
-                    rObj.x =  jitter(ind + 1, 0.4);// need to figure out how to pull in my jitter function
-                    rObj.y = elem.value;
-                    return rObj; 
-            }),
-            borderColor: "#719df8",
-            pointBackgroundColor: "#719df8",
-            pointBorderColor: "#719df8",
-            pointBorderWidth: 5,
-            fill: false,
-            showLine: false,
-            tension: 0,
-            spanGaps: true
-        }
-        resArr.push(obj);
-      }
-
-      var DataObj = { datasets: resArr};
-      return DataObj;
-  }
-
-
-
 
 
 // BELOW IS SOME BOILERPLATE FROM THE EXAMPLE FILE I WAS WORKING OFF OF  
@@ -115,10 +47,6 @@ _getFromLocalStorageOrCookie: function(param)
       
       return null;
     },
-
-
-
-
 
 /**
  * Extracts JWT token from url passed to the app or queries cookies / local storage for saved value
@@ -197,6 +125,6 @@ function bootstrapApplication() {
 fetchData().then(bootstrapApplication).catch(function(err){
   document.body.innerHTML = err;
 });
-// }());
+
 
 

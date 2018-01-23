@@ -1,26 +1,16 @@
 'use strict';
 
-/**
- * @ngdoc module
- * @name app.components: studentList
- * @description
- * # app.components: studentList
- * Module for listing out the students in the class
- */
+
 angular
   .module( 'app.components.litProChart')
-  .directive( 'barChart', 
-	[function($scope){
+  .directive( 'barChart', [function($scope){
 
-//console.log($scope, "$scope in barchart directive")
 
-	
-		
 
 	var link = function($scope, $el, $attrs){
 
 
-		var margin = {top: 20, right: 20, bottom: 100, left: 100},
+		var margin = {top: 50, right: 50, bottom: 100, left: 100},
 		width = 1000 - margin.left - margin.right,
 		height = 1000 - margin.top - margin.bottom;
 
@@ -81,14 +71,15 @@ angular
   			.attr("y", 0)
   			.attr("height", height)
   			.attr("width", function(){return x0.rangeBand()*(1/(1- barPad))})
-  			.attr("fill", function(d,id){
-    			if(id % 2 === 0){
-      				return  "#f9f9f7"
+  			.attr("class", function(d, id){
+  				if(id % 2 === 0){
+  					return "anno_odd"	
     			}
     			else{
-      				return "#ffffff"
+      				return  "anno_even"
     			}
   			})
+  		
         	chart.append("g")
         	.attr("class", "x axis")
         	.attr("transform", "translate(0," + height + ")")
@@ -224,9 +215,8 @@ angular
     		.append("rect")
     		.attr("transform",function(d){return "translate(" + x0(d.date) + ",0)"})
       		.on('click', function(a,b,c){
-     			//$scope.$emit('graphClick', a, b, c, "goal")    
-     		//console.log(a, b, c ,"a,b,c barChart")
-     		   $scope.listClick(null, 'category', a.cat, a.ids, a.date)
+     		
+     		$scope.listClick(null, 'category', a.cat, a.ids, a.date)
  		
 
  			$scope.$apply();
@@ -240,10 +230,12 @@ angular
       		.attr("y", function(d) { return y(d.value); })
       		.attr("height", function(d) { return height- y(d.value); });
 
+      		resize()
+
 		}
 
 		function resize(){
-				//console.log("resize")
+		
 			 	svg.attr("width", $el[0].clientWidth);
         		svg.attr("height", $el[0].clientWidth);
 		}
@@ -251,7 +243,7 @@ angular
 
 		var updateActive = function(){
     
-			console.log("im in update active", $scope.activeObj)
+			
         if($scope.activeObj.type === "cat"){
 
             if($scope.activeObj.previousStudents){
@@ -277,7 +269,7 @@ angular
             }
 
            for(let i = 0; i< $scope.activeObj.students.length; i++){
-           		console.log("inside students for loop",)
+           
            		  d3.selectAll(".label_student_"+ $scope.activeObj.students[i]).attr("opacity", 1).attr("stroke-opacity", 1)
            }
            for(let i = 0; i < $scope.activeObj.previousStudents.length; i++){
@@ -308,7 +300,6 @@ angular
 
       	 $scope.$watch(function(){return $scope.activeObj.students}, function(newVal, oldVal){
           if(!angular.equals(oldVal, newVal)){
-             console.log("something")
             	updateActive($scope)
           }
          
