@@ -42,13 +42,13 @@ angular
 
       $scope.rawData = [{"id":1, "name":"Jane", "data": [{"month": "September 2016", "value":1}, {"month": "October 2016", "value":21}, {"month": "November 2016", "value": 287}, {"month": "December 2016", "value": 150}, {"month": "January 2017", "value": 115}]},{"id":2, "name":"Christopher", "data": [{"month": "September 2016", "value":79}, {"month": "October 2016", "value": 199}, {"month": "November 2016", "value":156}, {"month": "December 2016", "value": 177}, {"month": "January 2017", "value": 49}]}, {"id":3, "name":"Max", "data": [{"month": "September 2016", "value": 280}, {"month": "October 2016", "value":284}, {"month": "November 2016", "value": 90}, {"month": "December 2016", "value": null}, {"month": "January 2017", "value": 49}]}];
 
-         var jitter = function(value, range){ // function to accomplish the Jitter -- Value input is 1,2,3..., or N of months
+        var jitter = function(value, range){ // function to accomplish the Jitter -- Value input is 1,2,3..., or N of months
         var min = value - range;
         var max = value + range;
         var random = Math.round(((Math.random()*(max - min) + min))*10000) / 10000;
           return random
       };
-      
+
       var formatData = function(initialData){ 
       var resArr = [];
     
@@ -185,8 +185,8 @@ angular
       .attr("y", function(){return 0})
       .attr("width", (width ) / ($scope.timeArray.length + 1))
       .attr("height", height)
-      .attr("fill",function(d){
-        if(d % 2 === 0){
+      .attr("fill",function(d, i){
+        if((i+1) % 2 === 0){
           return "#ffffff"
         }
         else{
@@ -199,7 +199,7 @@ angular
 
 
 
-           chart.append("g")
+        chart.append("g")
      .classed('x', true)
      .classed('grid', true)
      .call(xAxisGrid)
@@ -210,6 +210,7 @@ angular
      .classed('y', true)
      .classed('grid', true)
      .call(yAxisGrid)
+     //.attr("opacity")
      
            chart.append("g")
         .attr("class", "xAxis")
@@ -221,6 +222,7 @@ angular
         .attr("class", "yaxis")
         //.attr("transform", "translate("+2*padding+",0)")
         .call(yAxis)
+        .attr("stroke", "lightgray")
         //.attr("stroke", "#e3e1dc")
 
          chart.append("g")
@@ -245,7 +247,7 @@ angular
         .attr("r", 5)
         .attr("fill", function(d, idx, dataIdx){
 
-          if(d.id === $scope.activeObj.student){
+          if(d.id === $scope.activeObj.students[0]){
             return "#ef6640";
 
           }
@@ -281,13 +283,272 @@ angular
         return valueline(d)
       })  
 
-    
 
+        var labelW = (width)/9 *0.85 // MAX number of months at one time is 9
+        var labelH = labelW * 0.4
+        var space = labelH / 4;
+        var triangleL = space;
+
+       var label = enter1.selectAll(".label")
+       .data(function(d){return d;})
+       .enter()
+
+       label.append("rect")
+       .attr("x", function(d){ 
+          let xV = d.x
+          let mV = Math.round(d.x);
+          let xC = x(xV)
+          let mL = x(mV - 0.5)
+          let mR = x(mV + 0.5)
+    
+          if(xC - labelW/2 < mL){
+            return mL
+          }
+          else if(xC + labelW/2 > mR){
+            return mR - labelW
+          }
+          else{
+            return x(d.x) - labelW / 2
+          }
+   
+
+        })
+       .attr("y", function(d){return y(d.y) - labelH - 2*space})
+       .attr("width", labelW)
+       .attr("height", labelH)
+       .attr("fill","#5d5d5c")
+        .attr("class",function(d){
+
+        
+      return "display_series_point" + d.id})
+
+       .attr("opacity", function(d, idx, dataIdx){
+       
+         if(d.id === $scope.activeObj.students[0]){
+            return 1;
+
+          }
+          else{
+            return 0;
+          }
+        }) 
+      
+
+              label.append("rect")
+        .attr("x", function(d){return x(d.x)})
+        .attr("y", function(d){return y(d.y) - 2*space - triangleL*Math.sqrt(2)/2})
+       .attr("transform",  function(d){
+        let yP = y(d.y)  - 2*space - triangleL*Math.sqrt(2)/2
+        return "rotate(45 " + x(d.x) + " " + yP+  ")"})
+        .attr("width", triangleL)
+        .attr("height", triangleL)
+        .attr("fill", "#5d5d5c")
+          .attr("class",function(d){
+
+        
+      return "display_series_point" + d.id})
+          .attr("opacity", function(d, idx, dataIdx){
+       
+         if(d.id === $scope.activeObj.students[0]){
+            return 1;
+
+          }
+          else{
+            return 0;
+          }
+        })
+       
+
+              label.append("line")
+       .attr("x1", function(d){
+
+          let xV = d.x
+          let mV = Math.round(d.x);
+          let xC = x(xV)
+          let mL = x(mV - 0.5)
+          let mR = x(mV + 0.5)
+    
+          if(xC - labelW/2 < mL){
+            return mL
+          }
+          else if(xC + labelW/2 > mR){
+            return mR - labelW
+          }
+          else{
+            return x(d.x) - labelW / 2
+          }
+   
+
+
+    })
+        .attr("y1", function(d){return y(d.y) - labelH - 2*space})
+        .attr("x2", function(d){ 
+
+                    let xV = d.x
+          let mV = Math.round(d.x);
+          let xC = x(xV)
+          let mL = x(mV - 0.5)
+          let mR = x(mV + 0.5)
+    
+          if(xC - labelW/2 < mL){
+            return mL + labelW
+          }
+          else if(xC + labelW/2 > mR){
+            return mR
+          }
+          else{
+            return x(d.x) + labelW / 2
+          }
+   
+
+        })
+        .attr("y2", function(d){ return y(d.y) -labelH - 2*space})
+         .attr("class",function(d){
+          return "display_series_point" + d.id})
+
+          .attr("stroke-opacity", function(d,idx,dataIdx){
+            if(d.id === $scope.activeObj.students[0]){
+            return 1;
+
+          }
+          else{
+            return 0;
+          }
+          })
+
+        
+      
+        .attr("stroke-width", 3)
+        .attr("stroke", "#ef6640")
+
+
+          label.append("text")
+       .attr("x", function(d){ 
+                  let xV = d.x
+          let mV = Math.round(d.x);
+          let xC = x(xV)
+          let mL = x(mV - 0.5)
+          let mR = x(mV + 0.5)
+    
+          if(xC - labelW/2 < mL){
+            return mL + labelW/2//+ labelW * 0.05
+          }
+          else if(xC + labelW/2 > mR){
+            return mR - labelW/2 //+ labelW*0.05
+          }
+          else{
+            return x(d.x)  //+ labelW*0.05
+          }
+   
+
+
+        })
+       .attr("y", function(d){return y(d.y) - labelH*0.25- 2* space + labelW * 0.05})
+       .attr("text-anchor", "middle")
+        .attr("class",function(d){
+
+        
+      return "display_series_point" + d.id})
+      .text(function (d) { if(d.y || d.y === 0) {return d.y.toString() + " Minutes"}})
+         .attr("opacity", function(d, idx, dataIdx){
+
+         if(d.id === $scope.activeObj.students[0]){
+            return 1;
+
+          }
+          else{
+            return 0;
+          }
+        })
+         .attr("font-size", "10px")
+         .attr("fill", "#ece2e5")
       
 
 
 
 
+           label.append("text")
+           .attr("text-anchor", "middle")
+       .attr("x", function(d){ 
+             let xV = d.x
+          let mV = Math.round(d.x);
+          let xC = x(xV)
+          let mL = x(mV - 0.5)
+          let mR = x(mV + 0.5)
+    
+          if(xC - labelW/2 < mL){
+            return mL + labelW/2;
+          }
+          else if(xC + labelW/2 > mR){
+            return mR - labelW/2 //labelW + labelW*0.05
+          }
+          else{
+            return x(d.x) //- labelW / 2 + labelW*0.05
+          }
+   
+       })
+       .attr("y", function(d){return y(d.y) - 0.6*labelH  - 2*space})
+        .attr("class",function(d){
+
+        
+      return "display_series_point" + d.id})
+      .text(function (d) { if(d.y || d.y === 0) {return d.name}})
+         .attr("opacity", function(d, idx, dataIdx){
+
+         if(d.id === $scope.activeObj.students[0]){
+            return 1;
+
+          }
+          else{
+            return 0;
+          }
+        })
+         .attr("font-size", "12px")
+         .attr("fill", "#ece2e5")
+
+
+                 chart.append("g")
+      .attr("class", "invisibleCircles")
+
+      .selectAll("circleTest")
+      .data(mergedData, function(d, i){
+   
+        return i})
+      .enter()
+      .append("circle")
+      .on("click", function(a,b,c){
+               // $scope.clickF(a,b,c,"student")
+                //console.log(updateActive)
+                //$scope.updateActive();
+            console.log($scope.listClick, "is list click a func")
+           
+  $scope.listClick(a.id, 'student', null, null, null)
+            $scope.$apply();
+               // $scope.$emit('graphClick', a, b, c, "student")      
+          })
+          //.attr("class", "point")
+          .attr("class", function(a,b,c){
+            return "point_series_invisible" + a.id
+          })
+        .attr("r", 10)
+        /*.attr("fill", function(d, idx, dataIdx){
+
+          if(d.id === $scope.activeObj.student){
+            return "#ef6640";
+
+          }
+          else{
+            return "#7a9ef2";
+          }
+        }) */
+        .attr("opacity", 0)
+
+        .attr("cx", function(d){ return x(d.x);})
+        .attr("cy", function(d) { return y(d.y);})
+
+
+        //chart.enter().exit().remove();
+        resize();
 
           
         }
@@ -295,15 +556,41 @@ angular
 
         var updateActive = function(){
 
+        //CIRCLES
+        
+        d3.selectAll(".point_series" + $scope.activeObj.students[0]).attr("fill","#ef6640")
+        d3.selectAll(".point_series" + $scope.activeObj.previousStudents[0]).attr("fill","#7a9ef2")
+      
+
+        // CONNECTING LINE
+
+        d3.selectAll(".display_series" + $scope.activeObj.students[0]).attr("opacity", 1)
+        d3.selectAll(".display_series" + $scope.activeObj.previousStudents[0]).attr("opacity",0)
+
+
+        // LABEL RECTANGLES
+
+        d3.selectAll(".display_series_point" + $scope.activeObj.students[0]).attr("opacity",1).attr("stroke-opacity",1)
+        d3.selectAll(".display_series_point" + $scope.activeObj.previousStudents[0]).attr("opacity",0).attr("stroke-opacity",0)
+
         }
 
         var resize = function(){
-
+            svg.attr("width", $el[0].clientWidth);
+            svg.attr("height", $el[0].clientWidth); 
         }
 
-          //$scope.$on('windowResize',resize);
+          $scope.$on('windowResize',resize);
           //$scope.$on('updateChart', updateActive)  
-          $scope.$watch('d3Data', update);
+          $scope.$watch('items', update);
+
+          $scope.$watch(function(){return $scope.activeObj.students}, function(newVal, oldVal){
+          if(!angular.equals(oldVal, newVal)){
+             console.log("something")
+              updateActive($scope)
+          }
+         
+        }, true)
 
   }
 
@@ -387,7 +674,7 @@ angular
     }*/
 
     return {
-    	 template: '<div class="scatter-chart "></div>',
+    	 template: '<div class="scatter_chart"></div>',
       //templateUrl: 'js/components/lit-pro-chart/scatter-chart/scatter-chart.html',
       replace: true,
       scope: {

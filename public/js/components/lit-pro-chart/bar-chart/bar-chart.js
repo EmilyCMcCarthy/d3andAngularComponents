@@ -21,7 +21,7 @@ angular
 
 
 		var margin = {top: 20, right: 20, bottom: 100, left: 100},
-		width = 2000 - margin.left - margin.right,
+		width = 1000 - margin.left - margin.right,
 		height = 1000 - margin.top - margin.bottom;
 
 		var svg = d3.select($el[0]).append("svg")
@@ -226,7 +226,8 @@ angular
       		.on('click', function(a,b,c){
      			//$scope.$emit('graphClick', a, b, c, "goal")    
      		//console.log(a, b, c ,"a,b,c barChart")
- 			$scope.listClick(null, 'category', a.cat, a.ids, a.date)
+     		   $scope.listClick(null, 'category', a.cat, a.ids, a.date)
+ 		
 
  			$scope.$apply();
       		//$scope.$apply(updateActive());
@@ -322,7 +323,7 @@ angular
 	
 
   	return {
-    template : '<div class="barchart"></div>',//'js/components/lit-pro-chart/bar-chart/bar-chart.html',
+    template : '<div class="bar_chart"></div>',//'js/components/lit-pro-chart/bar-chart/bar-chart.html',
     replace: true,
    	scope: {
     	activeObj: '=activeobj',

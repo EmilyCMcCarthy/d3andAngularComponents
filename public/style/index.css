@@ -5,9 +5,87 @@ h1 {
 .student_list_inactive {
 	color: #253f73;
 	background-color: #f9f9f7;
+
 }
 
 .student_list_active {
 	color: #fdf7f5;
 	background-color: #eb7361;
+
+}
+
+.student_list_active .student_row_button_inv {
+	stroke: #f39c12;
+}
+
+.student_list_inactive .student_row_button_inv {
+ 	stroke: #ffffff;
+}
+
+.student_list_active .student_row_button {
+	fill: #ffffff;
+}
+
+.student_list_inactive .student_row_button {
+	fill: #f39c12;
+}
+
+
+
+
+.LitProChart {
+	padding: 30px 30px 30px 30px;
+	background-color: #e0dbd1;
+	border-style: solid;
+	border-color: #09a8ad;
+	border-width: 20px;
+}
+
+.scatter_chart {
+	background-color: #ffffff;
+	display: inline-block;
+
+	vertical-align: top;
+}
+
+.bar_chart {
+	background-color: #ffffff;
+	display: inline-block;
+
+}
+
+.student_list {
+	padding: 10px 10px 10px 10px;
+	background-color:#f9f9f7;
+	display: inline-block;
+	vertical-align: top;
+
+}
+
+
+.chart_div {
+	display: inline-block;
+}
+
+.LitProChart:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+
+.student_row_text {
+	display: inline-block;
+}
+
+.student_row_arrow {
+	display: inline-block;
+}
+
+.svg_button {
+	display: inline-block;
+	float: right;
+	vertical-align: middle;
+
 }

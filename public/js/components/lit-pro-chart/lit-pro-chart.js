@@ -56,12 +56,13 @@ angular
     vm.activeObj = {type: "student", students: [], previousStudents: [], cat: null, previousCat: null};
 
       vm.listClick = function(id, type, cat, catIds, time){
+        console.log("inside list click", id)
       //console.log("clicking scope", $scope)
-     // console.log(vm.activeObj, "activeObj in listClick")
+     // console.log(vm.activeObj, "activeObj in ")
       if(type === 'student'){
         if(vm.activeObj.students[0] === id && vm.activeObj.students.length === 1){
             vm.activeObj.students = [];
-            vm.activeObj.previousStudents = [id];
+            vm.activeObj.previousStudents = [id]
 
           if(vm.activeObj.previousCat){
             vm.activeObj.previousCat = null;
@@ -85,7 +86,7 @@ angular
 
           vm.activeObj.type = "student"
           vm.activeObj.previousStudents = vm.activeObj.students
-          vm.activeObj.students = [id];
+          vm.activeObj.students = [id]
 
         }
 
@@ -124,6 +125,8 @@ angular
      
 
       }
+
+      console.log(vm.activeObj, "active obj in parent")
   
     }
 

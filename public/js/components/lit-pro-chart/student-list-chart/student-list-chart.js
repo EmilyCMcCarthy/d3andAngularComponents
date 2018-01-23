@@ -18,7 +18,7 @@ angular
      // console.log(scope, "scope in StudentListChartA")
       //$scope.activeObj.student = $scope.students[0].name
       //console.log($scope, "scope in studentListChartB")
-
+      console.log(scope.activeObj, "scope.activeObj")
       
           scope.activeCheck = function(id){
            // console.log(id, "newVal from watch")
@@ -37,16 +37,16 @@ angular
 
       
 
-        scope.$watch('items', scope.activeCheck);
-        scope.$watch('scope.activeObj.students', function(newVal, oldVal){
+        //scope.$watch('items', scope.activeCheck);
+       /* scope.$watch('scope.activeObj.students', function(newVal, oldVal){
          // console.log("watching the activeObjc")
          
-          return scope.activeCheck(1)
+          //return scope.activeCheck(1)
         }, true)
         scope.$watch(attrs.activeobj, function(){console.log("attrs changed?")}, true)
         attrs.$observe('activeobj', function(newValue){
          // console.log("active obj attr is", arguments)
-        }, true)
+        }, true)*/
 
 
 

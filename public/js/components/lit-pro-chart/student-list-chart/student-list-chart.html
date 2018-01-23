@@ -1,11 +1,21 @@
-<div>
-	<h1>Student-List-Chart</h1>
+<div class="student_list">
+	
 
-	<input ng-model="query" />
+	<input ng-model="query" type="text" placeholder="Search Student Name"/>
 
 	<ul>
-		<li ng-repeat="item in items" ng-show="([item.name] | filter:query).length" style="list-style-type:none">
-			<button ng-class="activeCheck(item.id)" ng-click="listClick(item.id, 'student')" >{{item.name}}</button></li>
+		<li ng-repeat="item in items" ng-show="([item.name] | filter:query).length" style="list-style-type:none" ng-class="activeCheck(item.id)">
+			<p class="student_row_text" >{{item.name}}</p>
+			<!-- <button class="student_row_button" ng-class="activeCheck(item.id)" ng-click="listClick(item.id, 'student')" >{{item.name}} -->
+					<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="svg_button">
+						<circle cx="10" cy="10" r="10" class="student_row_button"  ng-click="listClick(item.id, 'student')"></circle>
+						<!-- <circle cx="10" cy="10" r="3" class="student_row_button_inv"  ng-click="listClick(item.id, 'student')" ></circle> -->
+						    <polyline stroke="#FFFFFF" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="
+	5,10  15,10 10,17  15,10 10,3" class="student_row_button_inv" ng-click="listClick(item.id, 'student')"/>
+					</svg>
+
+			<!-- </button> -->
+		</li>
 	</ul>
 </div>
 
