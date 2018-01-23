@@ -12,7 +12,7 @@ angular
 
 		var margin = {top: 50, right: 50, bottom: 100, left: 100},
 		width = 1000 - margin.left - margin.right,
-		height = 1000 - margin.top - margin.bottom;
+		height = 750 - margin.top - margin.bottom;
 
 		var svg = d3.select($el[0]).append("svg")
 					.attr({width: width + margin.left + margin.right, height: height + margin.top + margin.bottom})
@@ -41,7 +41,9 @@ angular
 								.domain(["GoalMet", "GoalExceeded", "GoalNotMet"])
 								.rangeRoundBands([0,x0.rangeBand()])
 
-			var y = d3.scale.linear().range([height, 0]);
+			var y = d3.scale.linear().range([height, 0])
+
+			//var yTicks = y.ticks()
 
 			var xAxis = d3.svg.axis()
 								.scale(x0)
@@ -50,6 +52,10 @@ angular
 			var yAxis = d3.svg.axis()
 								.scale(y)
 								.orient("left")
+								.ticks(4)
+								//.ticks(2)
+
+			//y.ticks()
 
 			y.domain([0, d3.max(data, function(d){return d.value})*1.25])
 
@@ -89,19 +95,24 @@ angular
       		.attr("dx", "-.8em")
       		.attr("dy", "-.55em")
       		.attr("transform", "rotate(-90)" );
-				
+			/*	
 			var yAxisGrid = yAxis
             .outerTickSize(0)
             .innerTickSize(-width)
             .tickPadding(1)
            	.ticks(7)//.orient("left")
+
+
      		
      		var grid =  chart.append("g")
      		.classed('y', true)
      		.classed('grid', true)
-     		.call(yAxisGrid)
+     		.call(yAxisGrid) */
 
-     		grid.selectAll("text").attr("font-size",20)
+   
+console.log(y.ticks(), "y.ticks")
+
+     		/*grid.selectAll("text").attr("font-size",20)*/
      
      		chart.append("g")
       		.attr("class", "y axis")
@@ -111,6 +122,18 @@ angular
       		.attr("dx", "-.8em")
       		.attr("dy", "-.55em")
       		.attr("transform", "rotate(-90)" );
+
+      		  	/*	chart.selectAll("yAxisGrid")
+    .data(y.ticks())
+    //.call(yAxis)
+    .enter()
+    .append("line")   
+    .attr("class", "y")
+    .attr("x1", 0)
+    .attr("x2", width)
+    .attr("y1", y)
+    .attr("y2", y)
+    .style("stroke", "#ccc") */
 
       		chart.append("g")
 			.selectAll("bar")
@@ -237,7 +260,7 @@ angular
 		function resize(){
 		
 			 	svg.attr("width", $el[0].clientWidth);
-        		svg.attr("height", $el[0].clientWidth);
+        		svg.attr("height", $el[0].clientWidth * 3/ 4);
 		}
 
 

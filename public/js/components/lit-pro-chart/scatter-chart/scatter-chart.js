@@ -13,7 +13,7 @@ angular
     console.log($el[0], "$el[0]")
     var margin = {top: 50, right: 50, bottom: 100, left: 100}; 
     var width = 1000 - margin.left - margin.right;
-    var height = 1000 - margin.top - margin.bottom;
+    var height = 750 - margin.top - margin.bottom;
 
 
     var svg = d3.select($el[0]).append("svg")
@@ -98,7 +98,7 @@ angular
 
             var yAxis = d3.svg.axis()
             .scale(y)
-            .ticks(10)
+            //.ticks(5)
             .orient("left")
             .innerTickSize(-(width))
             .outerTickSize(1)
@@ -179,7 +179,7 @@ angular
         //.attr("stroke", "#e3e1dc")
 
     chart.selectAll("yAxisGrid")
-    .data(y.ticks(10))
+    .data(y.ticks)
     .enter()
     .append("line")   
     .attr("class", "y")
@@ -544,11 +544,10 @@ angular
         var resize = function(){
            
             svg.attr("width", $el[0].clientWidth);
-            svg.attr("height", $el[0].clientWidth); 
+            svg.attr("height", $el[0].clientWidth * 3/ 4); 
         }
 
-          $scope.$on('windowResize',function(a,b,c){resize
-            (b,c)});
+          $scope.$on('windowResize',resize)
           //$scope.$on('updateChart', updateActive)  
           $scope.$watch('items', update);
 
