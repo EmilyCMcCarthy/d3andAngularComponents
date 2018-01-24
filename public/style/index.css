@@ -49,7 +49,7 @@
 }
 
 .student_list {
-	
+
 	background-color:#f9f9f7;
 	display: inline-block;
 	vertical-align: top;
@@ -63,7 +63,7 @@
 
 	 width: 75%;
      height: 100%;
-     
+
 }
 
 .LitProChart:before {
@@ -80,8 +80,7 @@
 
 .svg_button {
 	display: inline-block;
-	float: right;
-	vertical-align: bottom;
+	vertical-align: middle;
 }
 
 .anno_even{
@@ -96,7 +95,7 @@
 	stroke-width: 1;
 }
 
- 
+
 .tick text {
 	fill: #445d91;
 	font-family: Helvetica;

@@ -1,8 +1,5 @@
 (function(){
 'use strict';
-
-
-
 /**
  * @ngdoc module
  * @name app.components

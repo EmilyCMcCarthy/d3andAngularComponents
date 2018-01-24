@@ -7,11 +7,11 @@ angular
 
     var link = function(scope, el, attrs){
       scope.activeCheck = function(id){
-        if(scope.activeObj.students.indexOf(id) === -1){
-          return "student_list_inactive"
+        if (scope.activeObj.students.indexOf(id) === -1){
+          return 'student_list_inactive'
         }
-        else{
-          return "student_list_active" 
+        else {
+          return 'student_list_active'
         }
       }
     }
@@ -29,5 +29,4 @@ angular
     }
 
   })
-
 

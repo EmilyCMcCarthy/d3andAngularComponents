@@ -26,12 +26,12 @@ var litproApp = angular.module('app',[
       $rootScope.progress2 = true;
     })
 	})
-  .controller('appCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
-    $scope.helloObj = {name: "Emily", greeting: "Welcome!"}
+  .controller('appCtrl', ['$scope', '$window', '$rootScope', function(){
+
   }])
 
 
-// BELOW IS SOME BOILERPLATE FROM THE EXAMPLE FILE I WAS WORKING OFF OF  
+// BELOW IS SOME BOILERPLATE FROM THE EXAMPLE FILE I WAS WORKING OFF OF
 
 /**
  * Helper functions
@@ -44,7 +44,7 @@ _getFromLocalStorageOrCookie: function(param)
       if (localStorage.getItem(param) !== null) {
         return localStorage.getItem(param);
       }
-      
+
       return null;
     },
 
