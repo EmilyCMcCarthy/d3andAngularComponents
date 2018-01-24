@@ -26,9 +26,8 @@ angular
 function LitProChartController($rootScope, $scope, $window) {
 
   $window.addEventListener('resize', function () {
-    console.log("window Inner  and outer H", $window.innerHeight, $window.outerHeight)
-    console.log("window Inner W", $window.innerWidth, $window.outerWidth)
-    $scope.$broadcast('windowResize', $window.innerHeight, $window.innerWidth);
+ 
+    $scope.$broadcast('windowResize');
   });
 
 
@@ -60,7 +59,7 @@ function LitProChartController($rootScope, $scope, $window) {
       }
     }
     else if(type === 'category'){
-      if(vm.activeObj.cat === cat + "_" + time){
+      if(vm.activeObj.cat === cat + "_" + time.replace(/[^a-zA-Z0-9 -]/g)){
         vm.activeObj.previousCat = vm.activeObj.cat;
         vm.activeObj.previousStudents = vm.activeObj.students;
         vm.activeObj.cat = null;
@@ -76,7 +75,7 @@ function LitProChartController($rootScope, $scope, $window) {
         }*/
         vm.activeObj.previousCat = vm.activeObj.cat
         vm.activeObj.previousStudents = vm.activeObj.students;
-        vm.activeObj.cat = cat + "_" + time;
+        vm.activeObj.cat = cat + "_" + time.replace(/[^a-zA-Z0-9 -]/g);
         vm.activeObj.students = catIds
         vm.activeObj.type = "cat"
       }

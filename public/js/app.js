@@ -21,7 +21,7 @@ var litproApp = angular.module('app',[
       $rootScope.studentRawData2 = res.data;
       $rootScope.chartType2 = 'multiSeriesBar';
       $rootScope.profileType2 = 'group';
-      $rootScope.timeArray2 = ['September 2016', 'October 2016', 'November 2016', 'December 2016', 'January 2017'];
+      $rootScope.timeArray2 = ['12/31/2017', '01/07/2018', '01/14/2018', '01/21/2018', '01/28/2018'];
       $rootScope.valueType2 = ['Number of Goals', 'Goals'];
       $rootScope.progress2 = true;
     })

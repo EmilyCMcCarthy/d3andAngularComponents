@@ -22,7 +22,68 @@ angular
 		chart.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 		function update(){
-			var data = [{date: "A", value: 5, cat: "GoalMet", ids: [1,9,5,4,6]}, {date: "A", value: 3, cat: "GoalNotMet", ids: [3,7,8]}, {date: "A", value: 2, cat: "GoalExceeded", ids: [2,10]},{date: "B", value: 3, cat: "GoalMet", ids: [1,2,3]}, {date: "B", value: 5, cat: "GoalNotMet", ids: [4,5,6,7,8]}, {date: "B", value: 2, cat: "GoalExceeded", ids: [9,10]}, {date: "C", value: 2, cat: "GoalMet", ids: [10,9]}, {date: "C", value: 4, cat: "GoalNotMet", ids: [1,4,3,8]}, {date: "C", value: 4, cat: "GoalExceeded", ids: [2,5,6,7]}]
+
+      console.log($scope.rawData, "$scope.rawData in barchart")
+      console.log($scope.timeArray, "timeArray")
+
+      var consolidateData = function(raw, timeA){
+        var combinedData = [];
+
+        for(let i = 0; i < timeA.length; i++){
+          combinedData.push({date: timeA[i], "GoalMet": [], "GoalExceeded": [], "GoalNotMet": []})
+        }
+
+        console.log(combinedData, "combinedData")
+
+        for(let i = 0; i < raw.length; i++){
+            for(let j = 0; j < raw[i].data.length; j++){
+              
+              
+              if(timeA.indexOf(raw[i].data[j].date) >= 0){
+
+                  var ind = timeA.indexOf(raw[i].data[j].date);
+                  var studentV = raw[i].data[j].value;
+                  
+                  if(studentV < 2){ // Goal Not Met Case
+                    combinedData[ind].GoalNotMet.push(raw[i].id)
+                  }
+                  else if(studentV === 3){ // Goal Exceeded Case
+                    combinedData[ind].GoalExceeded.push(raw[i].id)
+                  }
+                  else if(studentV >= 2 && studentV < 3){ // Goal Met Case
+                    combinedData[ind].GoalMet.push(raw[i].id)
+                  }
+
+              }
+
+            }
+        }
+
+        return combinedData
+
+
+      }
+
+      var consolidatedData = consolidateData($scope.rawData, $scope.timeArray);
+     console.log(consolidatedData, "consolidatedData")
+
+     var formatBarData = function(data){
+        var resArr = [];
+
+        for(let i = 0; i < data.length; i++){
+          var GNMObj = {date: data[i].date, value: data[i].GoalNotMet.length, cat: "GoalNotMet", ids: data[i].GoalNotMet}
+          var GMObj = {date: data[i].date, value: data[i].GoalMet.length, cat: "GoalMet", ids: data[i].GoalMet}
+          var GEObj = {date: data[i].date, value: data[i].GoalExceeded.length, cat: "GoalExceeded", ids: data[i].GoalExceeded}
+          resArr.push(GNMObj, GMObj, GEObj)
+        }
+
+        return resArr
+     }
+
+     var data = formatBarData(consolidatedData)
+     console.log(data, "data")
+
+			var data2 = [{date: "A", value: 5, cat: "GoalMet", ids: [1,9,5,4,6]}, {date: "A", value: 3, cat: "GoalNotMet", ids: [3,7,8]}, {date: "A", value: 2, cat: "GoalExceeded", ids: [2,10]},{date: "B", value: 3, cat: "GoalMet", ids: [1,2,3]}, {date: "B", value: 5, cat: "GoalNotMet", ids: [4,5,6,7,8]}, {date: "B", value: 2, cat: "GoalExceeded", ids: [9,10]}, {date: "C", value: 2, cat: "GoalMet", ids: [10,9]}, {date: "C", value: 4, cat: "GoalNotMet", ids: [1,4,3,8]}, {date: "C", value: 4, cat: "GoalExceeded", ids: [2,5,6,7]}]
 		
 			var barPad = 0.1
 			var barOuterPad = barPad / 2;
@@ -52,7 +113,7 @@ angular
 			var yAxis = d3.svg.axis()
 								.scale(y)
 								.orient("left")
-								.ticks(4)
+								//.ticks(4)
 								//.ticks(2)
 
 			//y.ticks()
@@ -68,7 +129,7 @@ angular
 
         	chart.append("g")
   			.selectAll("annotations")
-  			.data(["A","B","C"])
+  			.data($scope.timeArray/*["A","B","C"]*/)
   			.enter()
   			.append("rect")
   			.attr("x", function(d){
@@ -95,8 +156,8 @@ angular
       		.attr("dx", "-.8em")
       		.attr("dy", "-.55em")
       		.attr("transform", "rotate(-90)" );
-			/*	
-			var yAxisGrid = yAxis
+			
+			/*var yAxisGrid = yAxis
             .outerTickSize(0)
             .innerTickSize(-width)
             .tickPadding(1)
@@ -123,7 +184,7 @@ console.log(y.ticks(), "y.ticks")
       		.attr("dy", "-.55em")
       		.attr("transform", "rotate(-90)" );
 
-      		  	/*	chart.selectAll("yAxisGrid")
+      		  	chart.selectAll("yAxisGrid")
     .data(y.ticks())
     //.call(yAxis)
     .enter()
@@ -133,7 +194,7 @@ console.log(y.ticks(), "y.ticks")
     .attr("x2", width)
     .attr("y1", y)
     .attr("y2", y)
-    .style("stroke", "#ccc") */
+    .style("stroke", "#ccc") 
 
       		chart.append("g")
 			.selectAll("bar")
@@ -156,7 +217,7 @@ console.log(y.ticks(), "y.ticks")
       
       		label.append("rect")
       		.attr("class", function(d){
-        		var classString = d.cat + "_" + d.date;
+        		var classString = d.cat + "_" + d.date.replace(/[^a-zA-Z0-9 -]/g);
         		for(let i = 0; i < d.ids.length; i++){
     				classString += " label_student_" + d.ids[i] 
     			} 
@@ -181,7 +242,7 @@ console.log(y.ticks(), "y.ticks")
 
 			label.append("rect")
           	.attr("class", function(d){
-        		var classString = d.cat + "_" + d.date;
+        		var classString = d.cat + "_" + d.date.replace(/[^a-zA-Z0-9 -]/g);
 				for(let i = 0; i < d.ids.length; i++){
      				classString += " label_student_" + d.ids[i] 
         		} 
@@ -220,7 +281,7 @@ console.log(y.ticks(), "y.ticks")
         		return y(d.value) - 2*space - labelH
       		})
       		.attr("class", function(d){
-        		var classString = d.cat + "_" + d.date;
+        		var classString = d.cat + "_" + d.date.replace(/[^a-zA-Z0-9 -]/g);
 				for(let i = 0; i < d.ids.length; i++){
           			classString += " label_student_" + d.ids[i] 
 				} 
@@ -239,7 +300,7 @@ console.log(y.ticks(), "y.ticks")
     		.attr("transform",function(d){return "translate(" + x0(d.date) + ",0)"})
       		.on('click', function(a,b,c){
      		
-     		$scope.listClick(null, 'category', a.cat, a.ids, a.date)
+     		$scope.listClick(null, 'category', a.cat, a.ids, a.date.replace(/[^a-zA-Z0-9 -]/g))
  		
 
  			$scope.$apply();
@@ -342,7 +403,8 @@ console.log(y.ticks(), "y.ticks")
    	scope: {
     	activeObj: '=activeobj',
     	rawData: '=rawdata',
-    	listClick: '=listclick'
+    	listClick: '=listclick',
+      timeArray: '=timearray'
 
     },
     //link: link,

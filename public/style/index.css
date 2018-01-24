@@ -49,11 +49,11 @@
 }
 
 .student_list {
-	padding: 10px 10px 10px 10px;
+	
 	background-color:#f9f9f7;
 	display: inline-block;
 	vertical-align: top;
-	margin: 10px;
+
 	width: 20%;
 }
 
