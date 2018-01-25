@@ -6,6 +6,7 @@ angular
   .directive( 'studentListChart', function(){
 
     var link = function(scope, el, attrs){
+      scope.sortColumn = 'name'
       scope.activeCheck = function(id){
         if (scope.activeObj.students.indexOf(id) === -1){
           return 'student_list_inactive'

@@ -551,8 +551,7 @@ angular
 
 
     return {
-    	 template: '<div class="scatter_chart"></div>',
-      //templateUrl: 'js/components/lit-pro-chart/scatter-chart/scatter-chart.html',
+      template: '<div class="scatter_chart"></div>',
       replace: true,
       scope: {
         items: '=rawdata',
