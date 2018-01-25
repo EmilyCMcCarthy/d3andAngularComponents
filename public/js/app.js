@@ -16,6 +16,15 @@ var litproApp = angular.module('app',[
       $rootScope.valueType = ['Number of Minutes', 'Minutes'];
       $rootScope.progress = true;
     })
+    $http.get('data/studentRawData3.json')
+    .then(function(res){
+      $rootScope.studentRawData3 = res.data;
+      $rootScope.chartType3 = 'scatter';
+      $rootScope.profileType3 = 'group';
+      $rootScope.timeArray3 = ['09/01/2016', '10/01/2016', '11/01/2016', '12/01/2016', '01/01/2017'];
+      $rootScope.valueType3 = ['Number of Minutes', 'Minutes'];
+      $rootScope.progress3 = true;
+    })
     $http.get('data/studentRawData2.json')
     .then(function(res){
       $rootScope.studentRawData2 = res.data;

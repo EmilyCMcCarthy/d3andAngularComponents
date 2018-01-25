@@ -1,0 +1,45 @@
+[
+  {"id":1, "name":"Jane A.", "value": 115, "unit": "",
+    "data": [{"date": "09/01/2016", "value":1}, {"date": "10/01/2016", "value":21}, {"date": "11/01/2016", "value": 287}, {"date": "12/01/2016", "value": 150}, {"date": "01/01/2017", "value": 115}]},
+
+  {"id":2, "name":"Christopher C.", "value": 49, "unit": "",
+    "data": [{"date": "09/01/2016", "value":79}, {"date": "10/01/2016", "value": 199}, {"date": "11/01/2016", "value":156}, {"date": "12/01/2016", "value": 177}, {"date": "01/01/2017", "value": 49}]},
+
+  {"id":3, "name":"Jehosephat D.", "value": 50, "unit": "",
+    "data": [{"date": "09/01/2016", "value": 280}, {"date": "10/01/2016", "value":284}, {"date": "11/01/2016", "value": 90}, {"date": "12/01/2016", "value": null}, {"date": "01/01/2017", "value": 50}]},
+
+    {"id":4, "name":"Janice E.", "value": 300, "unit": "",
+      "data": [{"date": "09/01/2016", "value": 300}, {"date": "10/01/2016", "value":267}, {"date": "11/01/2016", "value": 115}, {"date": "12/01/2016", "value": 180}, {"date": "01/01/2017", "value": 100}]},
+
+      {"id":5, "name":"Betty F.", "value": 500, "unit": "",
+        "data": [{"date": "09/01/2016", "value": 145}, {"date": "10/01/2016", "value":500}, {"date": "11/01/2016", "value": 222}, {"date": "12/01/2016", "value": 290}, {"date": "01/01/2017", "value": 300}]},
+
+        {"id":6, "name":"Sarah F.", "value": 50, "unit": "",
+          "data": [{"date": "09/01/2016", "value": 280}, {"date": "10/01/2016", "value":284}, {"date": "11/01/2016", "value": 90}, {"date": "12/01/2016", "value": 233}, {"date": "01/01/2017", "value": 50}]},
+
+          {"id":7, "name":"Rose G.", "value": 350, "unit": "",
+            "data": [{"date": "09/01/2016", "value": 50}, {"date": "10/01/2016", "value":100}, {"date": "11/01/2016", "value": 175}, {"date": "12/01/2016", "value": 250}, {"date": "01/01/2017", "value": 350}]},
+
+            {"id":8, "name":"Mary G.", "value": 50, "unit": "",
+              "data": [{"date": "09/01/2016", "value": 10}, {"date": "10/01/2016", "value":30}, {"date": "11/01/2016", "value": 122}, {"date": "12/01/2016", "value": 50}, {"date": "01/01/2017", "value": 40}]},
+
+              {"id":9, "name":"Benjamin H.", "value": 444, "unit": "",
+                "data": [{"date": "09/01/2016", "value": 222}, {"date": "10/01/2016", "value":333}, {"date": "11/01/2016", "value":444}, {"date": "12/01/2016", "value": 333}, {"date": "01/01/2017", "value": 222}]},
+
+                {"id":10, "name":"Danielle H.", "value": 115, "unit": "",
+                  "data": [{"date": "09/01/2016", "value": 115}, {"date": "10/01/2016", "value":100}, {"date": "11/01/2016", "value": 90}, {"date": "12/01/2016", "value": 107}, {"date": "01/01/2017", "value": 99}]},
+
+                  {"id":11, "name":"Chester I", "value": 289, "unit": "",
+                    "data": [{"date": "09/01/2016", "value": 289}, {"date": "10/01/2016", "value":245}, {"date": "11/01/2016", "value": 233}, {"date": "12/01/2016", "value": 255}, {"date": "01/01/2017", "value": 200}]},
+
+                    {"id":12, "name":"Samantha J.", "value": 201, "unit": "",
+                      "data": [{"date": "09/01/2016", "value": 87}, {"date": "10/01/2016", "value":77}, {"date": "11/01/2016", "value": 98}, {"date": "12/01/2016", "value": 201}, {"date": "01/01/2017", "value": 99}]},
+
+                      {"id":13, "name":"Lawrence K.", "value": 130, "unit": "",
+                        "data": [{"date": "09/01/2016", "value": 130}, {"date": "10/01/2016", "value":120}, {"date": "11/01/2016", "value": 87}, {"date": "12/01/2016", "value": 67}, {"date": "01/01/2017", "value": 50}]},
+
+                        {"id":14, "name":"Shona L.", "value": 50, "unit": "",
+                          "data": [{"date": "09/01/2016", "value": 50}, {"date": "10/01/2016", "value": 45}, {"date": "11/01/2016", "value": 25}, {"date": "12/01/2016", "value": 35}, {"date": "01/01/2017", "value": 50}]}
+
+
+  ]

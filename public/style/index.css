@@ -8,6 +8,7 @@
 	background-color: #eb7361;
 }
 
+
 .student_list_active .student_row_button_inv {
 	stroke: #f39c12;
 }
@@ -22,6 +23,16 @@
 
 .student_list_inactive .student_row_button {
 	fill: #f39c12;
+}
+
+.sort_active {
+	fill: #09a8ad;
+	stroke: #ffffff
+}
+
+.sort_inactive {
+	fill: #ffffff;
+	stroke: #d9d6cf
 }
 
 .LitProChart {
@@ -101,4 +112,38 @@
 	font-family: Helvetica;
 	font-size: 35;
 	font-weight: bold;
+}
+
+
+
+
+
+th:first-child{
+
+}
+th {
+}
+td:first-child{
+
+}
+
+td:last-child {
+
+}
+
+td {
+	vertical-align: middle;
+	align: center
+
+
+	}
+
+tr {
+	height: 100px;
+	width: 250px;
+}
+table {
+	border: 0px;
+	border-collapse: collapse;
+	width: 100%
 }

@@ -7,6 +7,29 @@ angular
 
     var link = function(scope, el, attrs){
       scope.sortColumn = 'name'
+      scope.sortF = function(type){
+
+        if(scope.mySort === type){
+          return "-" + type;
+        }
+        else{
+          return type
+        }
+
+
+      }
+      scope.sortCheck = function(type){
+
+        if(type === scope.mySort){
+          return 'sort_active';
+        }
+        else if("-" + type === scope.mySort){
+          return 'sort_active';
+        }
+        else{
+          return 'sort_inactive';
+        }
+      }
       scope.activeCheck = function(id){
         if (scope.activeObj.students.indexOf(id) === -1){
           return 'student_list_inactive'

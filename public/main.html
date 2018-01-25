@@ -2,23 +2,26 @@
   <html lang="en" >
     <head>
       <link rel="stylesheet" type="text/css" href="style/index.css"></link>
-      
+
       <script src="lib/jquery/dist/jquery.min.js"></script>
       <script src="lib/angular/angular.js"></script>
       <script src="lib/d3/d3.min.js"></script>
       <script src="lib/moment/min/moment.min.js"></script>
-      
+
       <script src="js/app.js"></script>
       <script src="js/components/components.module.js"></script>
       <script src="js/components/lit-pro-chart/lit-pro-chart.js"></script>
-      <script src="js/components/lit-pro-chart/bar-chart/bar-chart.js"></script> 
-      <script src="js/components/lit-pro-chart/student-list-chart/student-list-chart.js"></script> 
+      <script src="js/components/lit-pro-chart/bar-chart/bar-chart.js"></script>
+      <script src="js/components/lit-pro-chart/student-list-chart/student-list-chart.js"></script>
       <script src="js/components/lit-pro-chart/scatter-chart/scatter-chart.js"></script>
-    
+
     </head>
-    
+
     <body  ng-app="app" ng-controller="appCtrl">
-      <lit-pro-chart rawchartdata="studentRawData" charttype="chartType" profiletype="profileType" timeArray="timeArray" valuetype="valueType" progress="progress" activeobj="activeObj"></lit-pro-chart>  
+      <lit-pro-chart rawchartdata="studentRawData" charttype="chartType" profiletype="profileType" timeArray="timeArray" valuetype="valueType" progress="progress" activeobj="activeObj"></lit-pro-chart>
+
+      <lit-pro-chart rawchartdata="studentRawData3" charttype="chartType3" profiletype="profileType3" timeArray="timeArray3" valuetype="valueType3" progress="progress3" activeobj="activeObj3"></lit-pro-chart>
+
       <lit-pro-chart rawchartdata="studentRawData2" charttype="chartType2" profiletype="profileType2" timeArray="timeArray2" valuetype="valueType2" progress="progress2" activeobj="activeObj2"></lit-pro-chart>
     </body>
   </html>

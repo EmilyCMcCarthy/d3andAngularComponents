@@ -2,32 +2,51 @@
 
 	<input ng-model="query" type="text" placeholder="Search Student Name"/>
 
-	<ul>
-			<!-- Order By: <select ng-model="sortColumn">
-					<option value="name">Name ASC</option>
-					<option value="value">Number ASC</option>
-			</select> -->
 
+				<table>
+					<thead>
+					<tr>
+				<th>
 				<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="svg_button">
-				<circle cx="10" cy="10" r="10" class="student_row_button"  ng-click="mySort = 'name'"></circle>
-				<polyline fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="5,10  15,10 10,17  15,10 10,3" class="student_row_button_inv" ng-click="mySort = 'name'"/>
+				<circle fill="#ffffff" cx="10" cy="10" r="10" class="student_row_button"  ng-click="mySort = sortF('name')" ng-class="sortCheck('name')"></circle>
+				<polyline fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="5,10 10,15 15,10"  ng-click="mySort = sortF('name')" ng-class="sortCheck('name')"/>
 				</svg>
-				<button ng-click="mySort = 'name'">Name</button>
-				<button ng-click="mySort = 'id'">Id</button>
-				<button ng-click="mySort = 'value'">Value</button>
+				</th>
 
-				<li ng-repeat="item in items | orderBy:mySort" ng-show="([item.name] | filter:query).length" style="list-style-type:none" ng-class="activeCheck(item.id)" >
+				<th>
+				<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="svg_button">
+					<circle fill="#ffffff" cx="10" cy="10" r="10" class="student_row_button"  ng-click="mySort = sortF('value')" ng-class="sortCheck('value')"></circle>
+					<polyline fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="5,10 10,15 15,10"  ng-click="mySort = sortF('value')" ng-class="sortCheck('value')"/>
+					</svg>
+					</th>
+					<th></th>
+					</tr>
+					</thead>
+
+
+					<tbody>
+				<tr ng-repeat="item in items | orderBy:mySort" ng-show="([item.name] | filter:query).length"  style="list-style-type:none" ng-class="activeCheck(item.id)">
 		<!-- <li ng-repeat="item in items | orderBy:sortColumn" ng-show="([item.name] | filter:query).length" style="list-style-type:none" ng-class="activeCheck(item.id)" > -->
-			<p class="student_row_text">{{item.name}}</p>
-			<p class="student_row_text">{{item.data[item.data.length - 1].value}}</p>
+
+			<!-- <td class="student_row_text">{{item.name}}</td> -->
+
+			<td >{{item.name}}</td>
+			<td>{{item.value}}</td>
+			<!-- <td class="student_row_text">{{item.value}}</td> -->
+
 			<!-- <p class="student_row_text" >{{item.data[-1].value}}</p> -->
 			<!-- <p class="student_row_text" >{{item.data[item.data.length - 1].value}}</p> -->
-			<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="svg_button">
+			<td><svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" class="svg_button">
+
 				<circle cx="10" cy="10" r="10" class="student_row_button"  ng-click="listClick(item.id, 'student')"></circle>
 				<polyline fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="5,10  15,10 10,17  15,10 10,3" class="student_row_button_inv" ng-click="listClick(item.id, 'student')"/>
-			</svg>
-		</li>
-	</ul>
+			</svg></td>
+
+		</tr>
+		</tbody>
+
+		</table>
+
 
 </div>
 

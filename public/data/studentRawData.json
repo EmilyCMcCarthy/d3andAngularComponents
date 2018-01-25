@@ -1,9 +1,9 @@
 [
-  {"id":1, "name":"Jane", "value": 115,
+  {"id":1, "name":"Jane", "value": 115, "unit": "",
     "data": [{"date": "09/01/2016", "value":1}, {"date": "10/01/2016", "value":21}, {"date": "11/01/2016", "value": 287}, {"date": "12/01/2016", "value": 150}, {"date": "01/01/2017", "value": 115}]},
 
-  {"id":2, "name":"Christopher", "value": 49,
+  {"id":2, "name":"Christopher", "value": 49, "unit": "",
     "data": [{"date": "09/01/2016", "value":79}, {"date": "10/01/2016", "value": 199}, {"date": "11/01/2016", "value":156}, {"date": "12/01/2016", "value": 177}, {"date": "01/01/2017", "value": 49}]},
 
-  {"id":3, "name":"Max", "value": 50,
+  {"id":3, "name":"Max", "value": 50, "unit": "",
     "data": [{"date": "09/01/2016", "value": 280}, {"date": "10/01/2016", "value":284}, {"date": "11/01/2016", "value": 90}, {"date": "12/01/2016", "value": null}, {"date": "01/01/2017", "value": 50}]}]
