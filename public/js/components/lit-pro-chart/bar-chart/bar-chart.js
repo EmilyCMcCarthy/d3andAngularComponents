@@ -20,8 +20,7 @@ angular
 
 		function update(){
 
-      console.log($scope.rawData, '$scope.rawData in barchart')
-      console.log($scope.timeArray, 'timeArray')
+
 
       var consolidateData = function(raw, timeA){
         var combinedData = [];
@@ -30,7 +29,7 @@ angular
           combinedData.push({date: timeA[i], 'GoalMet': [], GoalExceeded: [], GoalNotMet: []})
         }
 
-        console.log(combinedData, 'combinedData')
+
 
         for (let i = 0; i < raw.length; i++){
             for (let j = 0; j < raw[i].data.length; j++){
@@ -62,7 +61,7 @@ angular
       }
 
       var consolidatedData = consolidateData($scope.rawData, $scope.timeArray);
-     console.log(consolidatedData, 'consolidatedData')
+
 
      var formatBarData = function(data){
         var resArr = [];
@@ -78,7 +77,7 @@ angular
      }
 
      var data = formatBarData(consolidatedData)
-     console.log(data, 'data')
+
 
 			var data2 = [{date: 'A', value: 5, cat: 'GoalMet', ids: [1, 9, 5, 4, 6]}, {date: 'A', value: 3, cat: 'GoalNotMet', ids: [3, 7, 8]}, {date: 'A', value: 2, cat: 'GoalExceeded', ids: [2, 10]}, {date: 'B', value: 3, cat: 'GoalMet', ids: [1, 2, 3]}, {date: 'B', value: 5, cat: 'GoalNotMet', ids: [4, 5, 6, 7, 8]}, {date: 'B', value: 2, cat: 'GoalExceeded', ids: [9, 10]}, {date: 'C', value: 2, cat: 'GoalMet', ids: [10, 9]}, {date: 'C', value: 4, cat: 'GoalNotMet', ids: [1, 4, 3, 8]}, {date: 'C', value: 4, cat: 'GoalExceeded', ids: [2, 5, 6, 7]}]
 
@@ -87,7 +86,7 @@ angular
 
 			var color = d3.scale.ordinal()
 								.domain(['GoalMet', 'GoalExceeded', 'GoalNotMet'])
-								.range(['#d8aade', '#d1e4b1', 'f4d0b0'])
+								.range(['#d8aade', '#d1e4b1', '#f4d0b0'])
 
 			var x0 = d3.scale.ordinal()
 								.domain(data.map(function(d){
@@ -167,7 +166,7 @@ angular
      		.call(yAxisGrid) */
 
 
-console.log(y.ticks(), 'y.ticks')
+
 
      		/*grid.selectAll("text").attr("font-size",20)*/
 
@@ -213,7 +212,7 @@ console.log(y.ticks(), 'y.ticks')
 
       		label.append('rect')
       		.attr('class', function(d){
-        		var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g);
+        		var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g, "");
         		for (let i = 0; i < d.ids.length; i++){
     				classString += ' label_student_' + d.ids[i]
     			}
@@ -238,7 +237,7 @@ console.log(y.ticks(), 'y.ticks')
 
 			label.append('rect')
           	.attr('class', function(d){
-        		var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g);
+						var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g, "");
 				for (let i = 0; i < d.ids.length; i++){
      				classString += ' label_student_' + d.ids[i]
         		}
@@ -266,6 +265,7 @@ console.log(y.ticks(), 'y.ticks')
       		label.append('line')
       		.attr('transform', function(d){return 'translate(' + x0(d.date) + ',0)'})
       		.attr('x1', function(d) {
+
         		return x1(d.cat) - labelW / 2 + x1.rangeBand() / 2 })
       		.attr('x2', function(d){
         		return x1(d.cat) + labelW / 2 + x1.rangeBand() / 2
@@ -277,7 +277,7 @@ console.log(y.ticks(), 'y.ticks')
         		return y(d.value) - 2 * space - labelH
       		})
       		.attr('class', function(d){
-        		var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g);
+        		var classString = d.cat + '_' + d.date.replace(/[^a-zA-Z0-9 -]/g, "");
 				for (let i = 0; i < d.ids.length; i++){
           			classString += ' label_student_' + d.ids[i]
 				}
@@ -285,7 +285,9 @@ console.log(y.ticks(), 'y.ticks')
 			})
       		.attr('stroke-opacity', 0)
       		.attr('stroke-width', 10)
-      		.attr('stroke', function(d){return color(d.cat)})
+      		.attr('stroke', function(d){
+
+						return color(d.cat)})
 
 
       		chart.append('g')
@@ -296,7 +298,7 @@ console.log(y.ticks(), 'y.ticks')
     		.attr('transform', function(d){return 'translate(' + x0(d.date) + ',0)'})
       		.on('click', function(a, b, c){
 
-     		$scope.listClick(null, 'category', a.cat, a.ids, a.date.replace(/[^a-zA-Z0-9 -]/g))
+     		$scope.listClick(null, 'category', a.cat, a.ids, a.date.replace(/[^a-zA-Z0-9 -]/g,""))
 
 
  			$scope.$apply();
@@ -326,6 +328,7 @@ console.log(y.ticks(), 'y.ticks')
 
         if ($scope.activeObj.type === 'cat'){
 
+
             if ($scope.activeObj.previousStudents){
 
             	for (let i = 0; i < $scope.activeObj.previousStudents.length; i++){
@@ -347,13 +350,15 @@ console.log(y.ticks(), 'y.ticks')
                d3.selectAll('.' + $scope.activeObj.previousCat).attr('opacity', 0).attr('stroke-opacity', 0)
             }
 
-           for (let i = 0; i < $scope.activeObj.students.length; i++){
 
-           		  d3.selectAll('.label_student_' + $scope.activeObj.students[i]).attr('opacity', 1).attr('stroke-opacity', 1)
-           }
            for (let i = 0; i < $scope.activeObj.previousStudents.length; i++){
            		d3.selectAll('.label_student_' + $scope.activeObj.previousStudents[i]).attr('opacity', 0).attr('stroke-opacity', 0)
-           }
+					 }
+
+					 for (let i = 0; i < $scope.activeObj.students.length; i++){
+
+														 d3.selectAll('.label_student_' + $scope.activeObj.students[i]).attr('opacity', 1).attr('stroke-opacity', 1)
+					}
 
 
         }
@@ -373,7 +378,9 @@ console.log(y.ticks(), 'y.ticks')
 
       //updateActive();
 
-      	 $scope.$watch(function(){return $scope.activeObj.students}, function(newVal, oldVal){
+				 $scope.$watch(function(){ return $scope.activeObj},
+				 function(newVal, oldVal){
+
           if (!angular.equals(oldVal, newVal)){
             	updateActive($scope)
           }

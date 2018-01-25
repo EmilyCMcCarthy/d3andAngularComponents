@@ -50,8 +50,10 @@ function LitProChartController($rootScope, $scope, $window) {
 
   function listClickHandler() {
     return function (id, type, cat, catIds, time) {
+
       if (type === 'student') {
-        if (vm.activeObj.students[0] === id && vm.activeObj.students.length === 1) {
+        console.log("student list click", arguments)
+        if (vm.activeObj.students[0] === id && !vm.activeObj.cat) { // Clicking on the same student
           vm.activeObj.students = [];
           vm.activeObj.previousStudents = [id];
           if (vm.activeObj.previousCat) {
@@ -73,7 +75,8 @@ function LitProChartController($rootScope, $scope, $window) {
         }
       }
       else if (type === 'category') {
-        if (vm.activeObj.cat === cat + '_' + time.replace(/[^a-zA-Z0-9 -]/g)) {
+        console.log("Category Click", arguments)
+        if (vm.activeObj.cat === cat + '_' + time.replace(/[^a-zA-Z0-9 -]/g, "")) {
           vm.activeObj.previousCat = vm.activeObj.cat;
           vm.activeObj.previousStudents = vm.activeObj.students;
           vm.activeObj.cat = null;
@@ -89,7 +92,7 @@ function LitProChartController($rootScope, $scope, $window) {
           }*/
           vm.activeObj.previousCat = vm.activeObj.cat;
           vm.activeObj.previousStudents = vm.activeObj.students;
-          vm.activeObj.cat = cat + '_' + time.replace(/[^a-zA-Z0-9 -]/g);
+          vm.activeObj.cat = cat + '_' + time.replace(/[^a-zA-Z0-9 -]/g, "");
           vm.activeObj.students = catIds;
           vm.activeObj.type = 'cat';
         }
