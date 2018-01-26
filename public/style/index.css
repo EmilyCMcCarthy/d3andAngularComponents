@@ -86,10 +86,19 @@
 }
 
 .student_row_text {
-	display: inline-block;
+
 	text-align: top;
+	font-size: 24pt;
 }
 
+.student_row_name {
+	width: 60%
+}
+
+.student_row_value {
+	width: 30%
+
+}
 .svg_button {
 	display: inline-block;
 	vertical-align: middle;
@@ -147,8 +156,8 @@ tr {
 	width: 250px;
 }
 table {
-	border: 0px;
 	border-collapse: collapse;
-	width: 80%;
+
+	width: 100%;
 
 }
