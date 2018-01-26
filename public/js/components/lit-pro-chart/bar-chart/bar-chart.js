@@ -190,7 +190,6 @@ angular
 				console.log(a,b,c, "abc in y axis grid")
 							 if (a % 1 === 0){
 									return 1;
-
 								}
 								else {
 									return 0;
