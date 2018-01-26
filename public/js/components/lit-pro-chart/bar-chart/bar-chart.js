@@ -84,6 +84,7 @@ angular
 			var barPad = 0.1
 			var barOuterPad = barPad / 2;
 
+		 // CHART SCALES
 			var color = d3.scale.ordinal()
 								.domain(['GoalMet', 'GoalExceeded', 'GoalNotMet'])
 								.range(['#d8aade', '#d1e4b1', '#f4d0b0'])
@@ -98,25 +99,33 @@ angular
 								.domain(['GoalMet', 'GoalExceeded', 'GoalNotMet'])
 								.rangeRoundBands([0, x0.rangeBand()])
 
-			var y = d3.scale.linear().range([height, 0])
+			var y = d3.scale.linear().range([height, 0]).domain([0, d3.max(data, function(d){return Math.ceil(d.value * 1.25)})])
 
 			//var yTicks = y.ticks()
 
 			var xAxis = d3.svg.axis()
 								.scale(x0)
 								.orient('bottom')
+								.innerTickSize(-(height))
+								.outerTickSize(1)
+								.tickPadding(20)
+
 
 			var yAxis = d3.svg.axis()
 								.scale(y)
 								.orient('left')
-								//.ticks(4)
-								//.ticks(2)
+								.innerTickSize(-(width))
+								.outerTickSize(1)
+								.tickPadding(20)
+								.tickValues(d3.range(0,d3.max(data, function(d){return Math.ceil(d.value * 1.25)}),d3.max(data, function(d){return Math.ceil(d.value * 1.25 / 8)})))
+								.tickFormat(d3.format(".0"))
+
 
 			//y.ticks()
 
-			y.domain([0, d3.max(data, function(d){return d.value}) * 1.25])
+		//	y.domain([0, d3.max(data, function(d){return Math.ceil(d.value * 1.25)})])
 
-
+							//var yTicks = 	y.ticks();
         	var labelW = x0.rangeBand() * 0.55
         	var labelH = labelW * 0.4
         	var space = labelH / 4;
@@ -148,22 +157,13 @@ angular
         	.attr('transform', 'translate(0,' + height + ')')
         	.call(xAxis)
        		.selectAll('text')
-      		.style('text-anchor', 'end')
-      		.attr('dx', '-.8em')
-      		.attr('dy', '-.55em')
-      		.attr('transform', 'rotate(-90)' );
-
-			/*var yAxisGrid = yAxis
-            .outerTickSize(0)
-            .innerTickSize(-width)
-            .tickPadding(1)
-           	.ticks(7)//.orient("left")
+      		//.style('text-anchor', 'end')
+      		//.attr('dx', '-.8em')
+					//.attr('dy', '-.55em')
+					//.attr('transform', 'translate(0,30)')
+      	//	.attr('transform', 'rotate(-90)' );
 
 
-     		var grid =  chart.append("g")
-     		.classed('y', true)
-     		.classed('grid', true)
-     		.call(yAxisGrid) */
 
 
 
@@ -174,22 +174,48 @@ angular
       		.attr('class', 'y axis')
       		.call(yAxis)
       		.selectAll('text')
-         	.style('text-anchor', 'left')
+         	 .style('text-anchor', 'left')
       		.attr('dx', '-.8em')
       		.attr('dy', '-.55em')
-      		.attr('transform', 'rotate(-90)' );
+				//	.attr('transform', 'rotate()' );
 
-      		  	chart.selectAll('yAxisGrid')
-    .data(y.ticks())
+				console.log(y, "y")
+
+    chart.selectAll('yAxisGrid')
+    .data(y.ticks)
     //.call(yAxis)
-    .enter()
-    .append('line')
-    .attr('class', 'y')
+		 .enter()
+		.append('line')
+		.attr('opacity', function(a,b,c){
+				console.log(a,b,c, "abc in y axis grid")
+							 if (a % 1 === 0){
+									return 1;
+
+								}
+								else {
+									return 0;
+								}
+							})
+
+  //.attr('class', 'y')
     .attr('x1', 0)
     .attr('x2', width)
     .attr('y1', y)
     .attr('y2', y)
-    .style('stroke', '#ccc')
+		.style('stroke', '#ccc')
+
+/*
+			var yAxisGrid = yAxis
+            .outerTickSize(0)
+            .innerTickSize(-width)
+            .tickPadding(1)
+           	///.ticks(7)//.orient("left")
+
+
+     		var grid =  chart.append("g")
+     		//.classed('y', true)
+     		.classed('grid', true)
+     		.call(yAxisGrid) */
 
       		chart.append('g')
 			.selectAll('bar')

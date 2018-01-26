@@ -11,6 +11,7 @@ var litproApp = angular.module('app',[
     .then(function(res){
       $rootScope.studentRawData = res.data;
       $rootScope.chartType = 'scatter';
+      $rootScope.activeObj1 = {type: 'student', students: [], previousStudents: [], cat: null, previousCat: null};
       $rootScope.profileType = 'group';
       $rootScope.timeArray = ['09/01/2016', '10/01/2016', '11/01/2016', '12/01/2016', '01/01/2017'];
       $rootScope.valueType = ['Number of Minutes', 'Minutes'];

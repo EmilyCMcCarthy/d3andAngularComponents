@@ -80,6 +80,7 @@ angular
 
         chart.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
+        // CHART SCALES
         var x = d3.scale.linear().domain([0.5, $scope.timeArray.length + 0.5]).range([0, width])
 .nice();
 
